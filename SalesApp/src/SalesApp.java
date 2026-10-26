@@ -1,9 +1,5 @@
 import java.util.Scanner;
 
-/**
- * Furniture shop sales program.
- * Calculates salaries, turnover, salary expenditure and the best salesperson.
- */
 public class SalesApp {
 
     private static final double BASIC_WAGE = 7500.0;
@@ -16,7 +12,7 @@ public class SalesApp {
 
     private static final Scanner input = new Scanner(System.in);
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         initialize();
         String again;
         do {
@@ -62,7 +58,7 @@ public class SalesApp {
         input.close();
     }
 
-    /** Fills the arrays with 4 salespeople and 4 weekly sales each. */
+    // Fills the arrays with 4 salespeople and 4 weekly sales each.
     public static void initialize() {
         arPersons = new String[] {"Thabo", "Loraine", "Zama", "Peter"};
         arSales = new double[][] {
@@ -73,7 +69,7 @@ public class SalesApp {
         };
     }
 
-    /** Returns the position of the salesperson, or -1 if not found. */
+    // Returns the position of the salesperson, or -1 if not found.
     public static int findSalesPerson(String name) {
         for (int i = 0; i < arPersons.length; i++) {
             if (arPersons[i].equalsIgnoreCase(name)) {
@@ -83,7 +79,7 @@ public class SalesApp {
         return -1;
     }
 
-    /** Asks for a name, then calculates, displays and returns that person's total monthly sales. */
+    // Asks for a name, then calculates, displays and returns that person's total monthly sales.
     public static double calcTotalMonthlySales() {
         int pos = askForSalesPerson();
         if (pos < 0) {
@@ -94,7 +90,7 @@ public class SalesApp {
         return total;
     }
 
-    /** Asks for a name, then calculates, displays and returns that person's monthly salary. */
+    // Asks for a name, then calculates, displays and returns that person's monthly salary.
     public static double calcMonthlySalary() {
         int pos = askForSalesPerson();
         if (pos < 0) {
@@ -105,7 +101,7 @@ public class SalesApp {
         return salary;
     }
 
-    /** Total of all sales made by all salespeople. */
+    // Total of all sales made by all salespeople.
     public static double calcMonthlyTurnOver() {
         double turnover = 0;
         for (int i = 0; i < arPersons.length; i++) {
@@ -114,7 +110,7 @@ public class SalesApp {
         return turnover;
     }
 
-    /** Total of all salaries paid to all salespeople. */
+    // Total of all salaries paid to all salespeople.
     public static double calcSalaryExpenditure() {
         double expenditure = 0;
         for (int i = 0; i < arPersons.length; i++) {
@@ -123,7 +119,7 @@ public class SalesApp {
         return expenditure;
     }
 
-    /** Displays the name and monthly sales of the salesperson with the highest sales. */
+    // Displays the name and monthly sales of the salesperson with the highest sales.
     public static void getBestSalesPerson() {
         int best = 0;
         for (int i = 1; i < arPersons.length; i++) {
@@ -135,16 +131,14 @@ public class SalesApp {
         System.out.println(arPersons[best] + "\t" + totalSalesAt(best));
     }
 
-    /** Displays every salesperson with weekly sales and total monthly sales. */
+    // Displays every salesperson with weekly sales and total monthly sales.
     public static void display() {
-        System.out.printf("%-10s%-10s%-10s%-10s%-10s%s%n",
-                "Name", "Week 1", "Week 2", "Week 3", "Week 4", "Total Sales");
-        System.out.println("-".repeat(75));
+        System.out.println("Name\tWeek 1\tWeek 2\tWeek 3\tWeek 4\tTotal Sales");
+        System.out.println("---------------------------------------------------------");
         for (int i = 0; i < arPersons.length; i++) {
-            System.out.printf("%-10s", arPersons[i]);
-
+            System.out.print(arPersons[i] + "\t");
             for (int w = 0; w < NUM_WEEKS; w++) {
-                System.out.printf("%-10s", arSales[i][w]);
+                System.out.print(arSales[i][w] + "\t");
             }
             System.out.println(totalSalesAt(i));
         }
@@ -153,15 +147,14 @@ public class SalesApp {
     // ---------- helper methods ----------
 
     private static void showMenu() {
-        System.out.println();
-        System.out.println("Please select a menu item below:");
-        System.out.println("1 - See All Salespeople");
-        System.out.println("2 - Find Salesperson");
-        System.out.println("3 - Total Monthly Sales");
-        System.out.println("4 - Monthly Salary");
-        System.out.println("5 - Best Salesperson");
-        System.out.println("6 - Monthly Turnover");
-        System.out.println("7 - Total Salary Expenditure");
+        System.out.println("\nPlease select a menu item below:\n"
+                + "1 - See All Salespeople\n"
+                + "2 - Find Salesperson\n"
+                + "3 - Total Monthly Sales\n"
+                + "4 - Monthly Salary\n"
+                + "5 - Best Salesperson\n"
+                + "6 - Monthly Turnover\n"
+                + "7 - Total Salary Expenditure");
         System.out.print("Your Option: ");
     }
 
@@ -173,7 +166,7 @@ public class SalesApp {
         }
     }
 
-    /** Prompts for a name and returns the position, printing a message if not found. */
+    // Prompts for a name and returns the position, printing a message if not found.
     private static int askForSalesPerson() {
         System.out.print("Search for salesperson: ");
         String name = input.nextLine().trim();
